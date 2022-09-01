@@ -2,12 +2,14 @@
 	<h1 class="title">GIHTY</h1>
 	<div class="search__wrap">
 		<label for="search">SEARCH</label>
-		<input type="text" name="search" id="search">
+		<input type="text" name="search" id="search" placeholder="input anything">
 	</div>
 	<ul class="gif__list">
 		<li *ngFor="let item of data" class="gif__item">
 			<p>{{item.title}}</p>
-			<img src="{{item.images.original.webp}}" alt="">
+			<div class="img_wrap">
+				<img src="{{item.images.original.webp}}" alt="">
+			</div>
 		</li>
 	</ul>
   
