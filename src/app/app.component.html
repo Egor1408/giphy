@@ -1,8 +1,20 @@
 <div class="container">
 	<h1 class="title">GIHTY</h1>
 	<div class="search__wrap">
-		<label for="search">SEARCH</label>
-		<input type="text" name="search" id="search" placeholder="input anything">
+		<div class="search__input">
+			<label for="search">SEARCH</label>
+			<input type="text" name="search" id="search" placeholder="input anything">
+		</div>
+		<div class="search__params">
+			<div class="select__limit">
+				<label for="limit">limit gifs</label>
+				<select name="limit" id="limit">
+					<option value=10>10</option>
+					<option value=20>20</option>
+					<option value=30>30</option>
+				</select>
+			</div>
+		</div>
 	</div>
 	<ul class="gif__list">
 		<li *ngFor="let item of data" class="gif__item">
