@@ -6,8 +6,10 @@
 	--yellow-1: #fac742;
 	--white: #fff;
 	--grey-1: #ededed;
+	--red: #cc1717;
 	--shadow-dark: rgba(0, 0, 0, .3);
 	--shadow-light: rgba(255, 255, 255, 0.1);
+	--baseOpacity: rgba(255, 255, 255, .5);
 }
 
 * {
@@ -18,6 +20,7 @@
 
 body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	position: relative;
 	font-size: 16px;
 	width: 100%;
 	height: 100vh;

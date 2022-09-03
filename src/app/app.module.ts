@@ -5,12 +5,14 @@ import {AppComponent} from './app.component'
 import {FormsModule} from '@angular/forms';
 import { HintComponent } from './components/hint/hint.component';
 import { SelectComponent } from './components/select/select.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HintComponent,
     SelectComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

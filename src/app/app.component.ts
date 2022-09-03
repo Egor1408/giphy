@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {GiphyService} from './services/api.service';
@@ -17,6 +18,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public rating: string = 'g';
 	public ratingValue: string[] = ['g', 'pg', 'pg-13', 'r'];
 	public search: string = 'Hello';
+	public modal: boolean = false;
+	public modalImgUrl: string = '';
+	public modalImgName: string = '';
 	private search$ = new Observable<Event>(observer => {
 		const search = document.getElementById('search');
 		
@@ -55,7 +59,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 		})
 	})
 
-	constructor(private giphyService: GiphyService) {}
+	constructor(
+		private giphyService: GiphyService,
+		private http: HttpClient) {}
 
 	ngOnInit() {
 		this.getList(this.search, this.limit, this.rating);
@@ -103,18 +109,24 @@ export class AppComponent implements OnInit, AfterViewInit {
 		})
 	}
 
+	public openModal(imgUrl: string, imgName: string) {
+		this.modalImgUrl = imgUrl;			
+		this.modalImgName = imgName;		
+		this.modal = true;
+	}
+
+	public closeModal() {
+		this.modal = false;
+	}
+
 	private getList(search, limit, rating) {
 		this.giphyService.getGifsList(search, limit, rating)
 			.subscribe({
 				next: (value => {
-					console.log(value.data);					
+					// console.log(value.data);					
 					this.data = value?.data!;			
 				})
 			})
 	}
-
-	
-
-	
 }
 

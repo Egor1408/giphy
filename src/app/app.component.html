@@ -22,11 +22,19 @@
 		<li *ngFor="let item of data" class="gif__item">
 			<p>{{item.title}}</p>
 			<div class="img_wrap">
-				<img src="{{item.images.original.webp}}" alt="">
+				<img 
+					src="{{item.images.fixed_height.webp}}" 
+					(click)="openModal(item.images.original.webp, item.title)"
+					alt=""
+				/>
 			</div>
 		</li>
 	</ul>
-  
+	<app-modal *ngIf="modal" 
+		[imgUrl]="modalImgUrl"
+		[imgName]="modalImgName"
+		(method)="closeModal()"
+	></app-modal>
 </div>
 
 

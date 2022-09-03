@@ -1,0 +1,50 @@
+.modal {
+
+	&__backdrop {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background:var(--shadow-dark);
+	}
+
+	&__wrap {
+		position: absolute;
+		width: 500px;
+		min-height: 300px;
+		background: var(--blue-2);
+		top: 15%;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 20px;
+		border-radius: 10px;
+		z-index: 10;
+
+		img {
+				margin-top: 20px;
+		}
+	}
+
+	&__title {
+		color: var(--white);
+		font-size: 24px;
+		max-width: 380px;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	&__close {
+		position: absolute;
+		right: 20px;
+		font-size: 30px;
+		color: var(--baseOpacity);
+		cursor: pointer;
+
+		&:hover {
+			color: var(--white);
+		}
+	}
+}
