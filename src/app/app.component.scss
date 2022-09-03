@@ -42,20 +42,7 @@
 		display: flex;
 		width: 100%;
 		padding-top: 10px;
-
-		label {
-			color: var(--white);
-			margin-right: 10px;
-		}
-
-		select {
-			height: 40px;
-			width: 50px;
-			border-radius: 10px;
-			border: none;
-			outline: none;
-			font-size: 18px;
-		}
+		justify-content: center;
 	}
 }
 

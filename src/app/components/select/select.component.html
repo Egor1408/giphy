@@ -1,0 +1,7 @@
+<div class="select__{{class}}">
+	<label for="{{class}}">{{name}}</label>
+	<select name="{{class}}" id="{{class}}">	
+		<option *ngFor="let item of value"
+			value={{item}}>{{item}}</option>
+	</select>
+</div>

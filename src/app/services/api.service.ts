@@ -12,15 +12,15 @@ export class GiphyService {
 
 	constructor(private http: HttpClient) {}
 
-	getGifsList(request: string, limit: number): Observable<IGifListData> {
+	getGifsList(request: string, limit: number, rating: string): Observable<IGifListData> {
 		return this.http.get<IGifListData>(environment.baseUrl, {
 			params: new HttpParams()
 				.set('api_key', environment.apiKey)
 				.set('q', request)
 				.set('limit', limit)
 				.set('offset', 0) //??????
-				.set('rating', 'g') //g, pg, pg-13, r
-				.set('lang', 'en') //en, de, ru, ua
+				.set('rating', rating) //g, pg, pg-13, r
+				.set('lang', 'ru') //en, de, ru, ua
 		})
 	}
 }

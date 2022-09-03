@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, observeOn } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {GiphyService} from './services/api.service';
 
 @Component({
@@ -9,11 +9,14 @@ import {GiphyService} from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
 	public data: any = [];
 	public limit: number = 10;
-	public search: string = 'Hello'
+	public limitValue: number[] = [10, 20, 30];
+	public rating: string = 'g';
+	public ratingValue: string[] = ['g', 'pg', 'pg-13', 'r'];
+	public search: string = 'Hello';
 	private search$ = new Observable<Event>(observer => {
 		const search = document.getElementById('search');
 		
@@ -39,11 +42,26 @@ export class AppComponent implements OnInit {
 		})
 	})
 
+	private rating$ = new Observable<Event>(observer => {
+		const rating = document.getElementById('rating');
+
+		if (!rating) {
+			observer.error('NULL');
+			return
+		}
+
+		rating.addEventListener('change', (e) => {
+			observer.next(e);
+		})
+	})
+
 	constructor(private giphyService: GiphyService) {}
 
 	ngOnInit() {
-		this.getList(this.search, this.limit);
+		this.getList(this.search, this.limit, this.rating);
+	}
 
+	ngAfterViewInit() {
 		this.search$
 			.pipe(
 				map(event => (event.target as HTMLInputElement).value),
@@ -53,7 +71,7 @@ export class AppComponent implements OnInit {
 			.subscribe({
 				next: value => {
 					this.search = value
-					this.getList(this.search, this.limit)
+					this.getList(this.search, this.limit, this.rating)
 				},
 				complete: () => console.log('complete'),
 				
@@ -68,15 +86,28 @@ export class AppComponent implements OnInit {
 			.subscribe({
 				next: value => {
 					this.limit = value;
-					this.getList(this.search, this.limit)
+					this.getList(this.search, this.limit, this.rating)
+				}
+		})
+
+		this.rating$
+			.pipe(
+				map(event => (event.target as HTMLSelectElement).value),
+				distinctUntilChanged(),
+			)
+			.subscribe({
+				next: value => {
+					this.rating = value;
+					this.getList(this.search, this.limit, this.rating)
 				}
 		})
 	}
 
-	private getList(search, limit) {
-		this.giphyService.getGifsList(search, limit)
+	private getList(search, limit, rating) {
+		this.giphyService.getGifsList(search, limit, rating)
 			.subscribe({
 				next: (value => {
+					console.log(value.data);					
 					this.data = value?.data!;			
 				})
 			})

@@ -1,19 +1,21 @@
 <div class="container">
-	<h1 class="title">GIHTY</h1>
+	<h1 class="title">GIPHY</h1>
 	<div class="search__wrap">
 		<div class="search__input">
 			<label for="search">SEARCH</label>
 			<input type="text" name="search" id="search" placeholder="input anything">
 		</div>
 		<div class="search__params">
-			<div class="select__limit">
-				<label for="limit">limit gifs</label>
-				<select name="limit" id="limit">
-					<option value=10>10</option>
-					<option value=20>20</option>
-					<option value=30>30</option>
-				</select>
-			</div>
+			<app-select 
+				class="limit" 
+				name="limit gifs"
+				[value]="limitValue"
+			></app-select>
+			<app-select 
+				class="rating" 
+				name="age rating" 
+				[value]="ratingValue"
+			></app-select>
 		</div>
 	</div>
 	<ul class="gif__list">
